@@ -307,9 +307,9 @@ def partially_stochastic_variational_wide_resnet(
         if l_i == 0:
             name_str = f"Input: {'Stoc' if f else 'Det'}\n"
         elif l_i < 13:
-            name_str = f"ResnetBlock-{l_i}: {'Stoc' if f else 'Det'}"
+            name_str = f"{name_str}\nResnetBlock-{l_i}: {'Stoc' if f else 'Det'}"
         elif l_i == 13:
-            name_str = f"Output-{l_i}: {'Stoc' if f else 'Det'}"
+            name_str = f"{name_str}\nOutput-{l_i}: {'Stoc' if f else 'Det'}"
 
     print(f"Stochastic layer code {stochastic_layer_code} converted into {name_str}")
 
@@ -347,6 +347,9 @@ def partially_stochastic_variational_wide_resnet(
         version=2,
         stochastic_group_flags=stochastic_layer_flags[1 : 1 + num_blocks],
         seed=seeds[1],
+        prior_stddev=prior_stddev,
+        dataset_size=dataset_size,
+        stddev_init=stddev_init
     )
     x = group(
         x,
@@ -360,6 +363,9 @@ def partially_stochastic_variational_wide_resnet(
             1 + num_blocks : 1 + 2 * num_blocks
         ],
         seed=seeds[2],
+        prior_stddev=prior_stddev,
+        dataset_size=dataset_size,
+        stddev_init=stddev_init
     )
     x = group(
         x,
@@ -373,6 +379,9 @@ def partially_stochastic_variational_wide_resnet(
             1 + 2 * num_blocks : 1 + 3 * num_blocks
         ],
         seed=seeds[3],
+        prior_stddev=prior_stddev,
+        dataset_size=dataset_size,
+        stddev_init=stddev_init
     )
 
     x = BatchNormalization()(x)
