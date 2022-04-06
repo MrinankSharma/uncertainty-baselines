@@ -298,20 +298,20 @@ def partially_stochastic_variational_wide_resnet(
     seeds = tf.random.experimental.stateless_split([seed, seed + 1], 5)[:, 0]
 
     assert stochastic_layer_code > -1
-    assert stochastic_layer_code < 2 ** 15
+    assert stochastic_layer_code < 2 ** 14
 
     stochastic_layer_flags = [stochastic_layer_code & 2 ** i > 0 for i in range(0, 14)]
 
     name_str = ""
     for l_i, f in enumerate(stochastic_layer_flags):
         if l_i == 0:
-            name_str = f"Input: {'Stoc' if f else 'Det'}\n"
+            name_str = f"Input: {'Stoc' if f else 'Det'}"
         elif l_i < 13:
             name_str = f"{name_str}\nResnetBlock-{l_i}: {'Stoc' if f else 'Det'}"
         elif l_i == 13:
             name_str = f"{name_str}\nOutput-{l_i}: {'Stoc' if f else 'Det'}"
 
-    print(f"Stochastic layer code {stochastic_layer_code} converted into {name_str}")
+    print(f"Stochastic layer code {stochastic_layer_code} converted into MixedStochasticWideResnet::\n{name_str}")
 
     l2_reg = tf.keras.regularizers.l2
     hps = _parse_hyperparameters(l2, hps)
