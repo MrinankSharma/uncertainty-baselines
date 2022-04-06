@@ -52,7 +52,11 @@ flags.DEFINE_integer('num_eval_samples', 5,
 flags.FLAGS.set_default('l2', 4e-4)
 flags.FLAGS.set_default('train_epochs', 250)
 flags.FLAGS.set_default('train_proportion', 0.95)
+
 FLAGS = flags.FLAGS
+
+flags.DEFINE_integer('stochastic_layer_code', 14789,
+                     'stochastic layer code, parsed into stochastic units')
 
 flags.DEFINE_float('bn_l2', None, 'L2 reg. coefficient for batch-norm layers.')
 flags.DEFINE_float('input_conv_l2', None,
