@@ -38,7 +38,7 @@ import uncertainty_baselines as ub
 import utils  # local file import from baselines.cifar
 from tensorboard.plugins.hparams import api as hp
 
-from partially_stochatic_models import partially_stochastic_variational_wide_resnet
+from partially_stochastic_models.partially_stochastic_variational_wide_resnet import partially_stochastic_variational_wide_resnet
 
 flags.DEFINE_integer('kl_annealing_epochs', 200,
                      'Number of epoch over which to anneal the KL term to 1.')
