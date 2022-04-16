@@ -5,7 +5,9 @@ description = ""
 authors = ["Mrinank Sharma <mrinank.sharma.97+dev@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = ">3.9"
+python = ">3.9, <4.0"
+tensorflow-datasets = "^4.5.2"
+jupyterlab = "^3.3.4"
 
 [tool.poetry.dev-dependencies]
 
